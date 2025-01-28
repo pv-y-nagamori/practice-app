@@ -74,5 +74,7 @@ model Memo {
   id        Int     @id @default(autoincrement())
   title     String
   content   String
+  createdAt     DateTime  @default(now()) @map(name: "created_at")
+  updatedAt     DateTime  @updatedAt @map(name: "updated_at")
   users     User[]
 }

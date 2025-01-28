@@ -7,10 +7,42 @@ docker compose up -d --build
 ```
 
 # 2.prisma
-```
+```スキーマ反映
 npx prisma db push
 ```
-```
+```migration file生成
 npx prisma migrate dev --name my_migrate_init
 ```
+```GUI起動
+npx prisma studio
+```
 
+
+# 3.APIひな形
+``` app/api/{dir}/routes.ts
+import { NextRequest, NextResponse } from 'next/server';
+import { PrismaClient } from '@prisma/client';
+
+const prisma = new PrismaClient();
+
+// GETアクセス時
+export async function GET() {
+    const example = await prisma.{model}.findMany()
+    return NextResponse.json();
+}
+
+// POSTアクセス時
+export async function POST(request: NextRequest) {
+
+}
+
+// PUTアクセス時
+export async function PUT(request: NextRequest) {
+
+}
+
+// DELETEアクセス時
+export async function DELETE(request: NextRequest) {
+
+}
+```
