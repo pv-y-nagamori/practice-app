@@ -1,1 +1,10 @@
-node_modules
+/.next/
+
+# dotenv environment variables file (build for Zeit Now)
+.env
+.env.build
+
+# Dependency directories
+node_modules/
+
+package-lock.json
