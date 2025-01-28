@@ -1,0 +1,16 @@
+## 前提条件：Docker Desktop または、WSL上にDockerがインストールされていること。
+参考(https://qiita.com/studio_haneya/items/0bc57d0c21732fc277fd)
+
+# 1.Docker Build
+```
+docker compose up -d --build
+```
+
+# 2.prisma
+```
+npx prisma db push
+```
+```
+npx prisma migrate dev --name my_migrate_init
+```
+
