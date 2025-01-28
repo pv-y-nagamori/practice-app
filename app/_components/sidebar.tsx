@@ -9,9 +9,9 @@ import {
   ListItemIcon,
   Toolbar,
 } from "@mui/material";
-import BeachAccessIcon from "@mui/icons-material/BeachAccess";
+import CreateIcon from '@mui/icons-material/Create';
 import LogoutIcon from '@mui/icons-material/Logout';
-import CoffeeIcon from "@mui/icons-material/Coffee";
+import RecordVoiceOverIcon from '@mui/icons-material/RecordVoiceOver';
 import React from "react";
 import { usePathname } from "next/navigation";
 import { signOut, useSession } from "next-auth/react";
@@ -23,8 +23,8 @@ type MenuItem = {
   icon: React.ReactNode;
 };
 const menuList: MenuItem[] = [
-  { name: "ページ１", url: "/page1", icon: <BeachAccessIcon /> },
-  { name: "ページ２", url: "/page2", icon: <CoffeeIcon /> },
+  { name: "新規登録", url: "/create", icon: <CreateIcon /> },
+  { name: "×××", url: "/minutes", icon: <RecordVoiceOverIcon /> },
 ];
 
 const drawerWidth = 240;

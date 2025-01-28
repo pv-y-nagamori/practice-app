@@ -49,20 +49,20 @@ CREATE TABLE "verificationtokens" (
 );
 
 -- CreateTable
-CREATE TABLE "Article" (
+CREATE TABLE "Memo" (
     "id" SERIAL NOT NULL,
     "title" TEXT NOT NULL,
     "content" TEXT NOT NULL,
 
-    CONSTRAINT "Article_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "Memo_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
-CREATE TABLE "_ArticleToUser" (
+CREATE TABLE "_MemoToUser" (
     "A" INTEGER NOT NULL,
     "B" INTEGER NOT NULL,
 
-    CONSTRAINT "_ArticleToUser_AB_pkey" PRIMARY KEY ("A","B")
+    CONSTRAINT "_MemoToUser_AB_pkey" PRIMARY KEY ("A","B")
 );
 
 -- CreateIndex
@@ -81,7 +81,7 @@ CREATE UNIQUE INDEX "verificationtokens_token_key" ON "verificationtokens"("toke
 CREATE UNIQUE INDEX "verificationtokens_identifier_token_key" ON "verificationtokens"("identifier", "token");
 
 -- CreateIndex
-CREATE INDEX "_ArticleToUser_B_index" ON "_ArticleToUser"("B");
+CREATE INDEX "_MemoToUser_B_index" ON "_MemoToUser"("B");
 
 -- AddForeignKey
 ALTER TABLE "accounts" ADD CONSTRAINT "accounts_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "users"("id") ON DELETE CASCADE ON UPDATE CASCADE;
@@ -90,7 +90,7 @@ ALTER TABLE "accounts" ADD CONSTRAINT "accounts_user_id_fkey" FOREIGN KEY ("user
 ALTER TABLE "sessions" ADD CONSTRAINT "sessions_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "users"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "_ArticleToUser" ADD CONSTRAINT "_ArticleToUser_A_fkey" FOREIGN KEY ("A") REFERENCES "Article"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE "_MemoToUser" ADD CONSTRAINT "_MemoToUser_A_fkey" FOREIGN KEY ("A") REFERENCES "Memo"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "_ArticleToUser" ADD CONSTRAINT "_ArticleToUser_B_fkey" FOREIGN KEY ("B") REFERENCES "users"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE "_MemoToUser" ADD CONSTRAINT "_MemoToUser_B_fkey" FOREIGN KEY ("B") REFERENCES "users"("id") ON DELETE CASCADE ON UPDATE CASCADE;
