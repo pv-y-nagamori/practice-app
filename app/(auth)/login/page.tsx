@@ -15,7 +15,6 @@ export default function Login() {
 		alignItems: 'center',
 		justifyContent: 'center',
 		height: '100vh',
-		backgroundColor: '#f0f0f0',
 	  });
 	  
 	  const LoginCard = styled('div')({
@@ -29,10 +28,10 @@ export default function Login() {
 	<Container>
 		<LoginCard>
 			<Typography variant="h5" gutterBottom>
-			Login
+			sign in with
 			</Typography>
 			<Button variant="contained" color="primary" fullWidth onClick={() => signIn('google', {}, { prompt: 'login' })}>
-			  <GoogleIcon />ログイン
+			  <GoogleIcon /> google Login
 			</Button>
 		</LoginCard>
 	</Container>
