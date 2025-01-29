@@ -7,18 +7,34 @@ import {
   TextField,
 } from "@mui/material";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useState, use } from "react";
+import useSWR from 'swr';
+type Memo = {
+  id: number,
+  title: string,
+  content: string,
+  createdAt: string,
+  updatedAt: string
+}
 
-export default function Home() {
+async function fetcher(key: string) {
+  return fetch(key).then((res) => res.json() as Promise<Memo | null>);
+}
+
+export default function Home( { params }: { params: Promise<{ id: string }> }) {
+  
+  const id = use(params).id
+
+  const {data , error, isLoading} = useSWR(`/api/memo?id=${id}`,fetcher);
 
   const router = useRouter();
 
   let btnDisabled = false;
 
-  const [title, setTitle] = useState('');
+  const [title, setTitle] = useState(data?.title);
   let titleErr = false;
 
-  const [content, setContent] = useState('');
+  const [content, setContent] = useState(data?.content);
   let contentErr = false;
 
   const onSubmit = async () => {
@@ -32,11 +48,12 @@ export default function Home() {
     btnDisabled = true
 
     await fetch('/api/memo',{
-      method: "POST",
+      method: "PUT",
       headers: {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
+        id:id,
         title: title,
         content: content
       })
@@ -52,10 +69,13 @@ export default function Home() {
     
   }
 
+  if (error) return <div>エラーです</div>;
+  if(isLoading) return <div>読み込み中...</div>;
+
   return (
     <Container>
       <Paper elevation={3} sx={{m: 1, p: 5 }}>
-        <h1>create</h1>
+        <h1>edit</h1>
         <FormGroup>
           <TextField
             id="title"
