@@ -11,6 +11,7 @@ import {
 } from "@mui/material";
 import CreateIcon from '@mui/icons-material/Create';
 import LogoutIcon from '@mui/icons-material/Logout';
+import DirectionsCarIcon from '@mui/icons-material/DirectionsCar';
 import RecordVoiceOverIcon from '@mui/icons-material/RecordVoiceOver';
 import React from "react";
 import { usePathname } from "next/navigation";
@@ -25,6 +26,7 @@ type MenuItem = {
 const menuList: MenuItem[] = [
   { name: "新規登録", url: "/create", icon: <CreateIcon /> },
   { name: "×××", url: "/minutes", icon: <RecordVoiceOverIcon /> },
+  { name: "研修課題", url: "/car", icon: <DirectionsCarIcon /> },
 ];
 
 const drawerWidth = 240;

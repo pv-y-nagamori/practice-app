@@ -4,33 +4,32 @@ import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
 export async function GET(request: NextRequest) {
+  const id = request?.nextUrl?.searchParams.get("id");
+  
+  try {
+      let response;
 
-    const id = request?.nextUrl?.searchParams.get("id");
-    
-    let jsonData = null;
-    try
-    {
-      if (!!id) {
-        const memo = await prisma.memo.findFirst({
-          where: {
-            id: parseInt(id) 
+      if (id) {
+          const memo = await prisma.memo.findFirst({
+              where: {
+                  id: parseInt(id)
+              }
+          });
+          // memoが存在しない場合は404を返す
+          if (!memo) {
+              return NextResponse.json({ message: "Memo not found" }, { status: 404 });
           }
-        });
-        jsonData = NextResponse.json(memo);
+          response = NextResponse.json(memo, { status: 200 });
       } else {
-        const memos = await getAllMemos();
-        jsonData = NextResponse.json(memos);
+          const memos = await getAllMemos();
+          response = NextResponse.json(memos, { status: 200 });
       }
 
-    }
-    catch
-    {
-        jsonData = NextResponse.json({message:"error"})
-    }
-    finally
-    {
-        return jsonData;
-    }
+      return response;
+  } catch (error) {
+      console.error(error);
+      return NextResponse.json({ message: "Internal Server Error" }, { status: 500 });
+  }
 }
 
 export async function POST(request: NextRequest) {

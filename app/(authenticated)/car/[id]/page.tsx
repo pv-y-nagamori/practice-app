@@ -92,6 +92,7 @@ export default function Home( { params }: { params: Promise<{ id: string }> }) {
             setKana(res.response[0].car_model_name_kana ?? '');
             setCompany(res.response[0].car_company_name ?? '');
         })
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     return (

@@ -75,7 +75,7 @@ export default function CarList() {
         return arr.flatMap((_, i) => i % size ? [] : [arr.slice(i, i + size)]);
     }
 
-    const  setDatas  = (res : any) => {
+    const  setDatas  = (res : []) => {
         setData(sliceArray(res, 30));
         setPageData(data[0]);
     }
